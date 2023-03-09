@@ -12,25 +12,18 @@ function onPauseVideo(evt) {
   //   console.log(seconds);
   localStorage.setItem(STORAGE_KEY, seconds);
 }
-// зачем мне эта фукция
-// player.getVideoTitle().then(function (title) {
-//   console.log('title:', title);
-// });
 
-// ???????????????then вместо try?
-player
-  .setCurrentTime(localStorage.getItem(STORAGE_KEY))
-  .then(function (seconds) {
-    // seconds = the actual time that the player seeked to
-  })
-  .catch(function (error) {
-    switch (error.name) {
-      case 'RangeError':
-        // the time was less than 0 or greater than the video’s duration
-        break;
+// player.setCurrentTime(localStorage.getItem(STORAGE_KEY) || 0);
 
-      default:
-        // some other error occurred
-        break;
-    }
-  });
+if (localStorage.getItem(STORAGE_KEY)) {
+  try {
+    const savedData = localStorage.getItem(STORAGE_KEY);
+    const parsedData = JSON.parse(savedData);
+    // const time = parsedData.seconds;
+    player.setCurrentTime(parsedData);
+    // player.setCurrentTime(time);
+  } catch (error) {
+    console.log(error.name);
+    console.log(error.message);
+  }
+}
