@@ -8,7 +8,6 @@ form.addEventListener('submit', onFormSubmit);
 const STORAGE_KEY = 'feedback-form-state';
 let formData = {};
 
-console.log(formData);
 populateTextarea();
 
 function onElementFormInput(evt) {
@@ -24,7 +23,6 @@ function onFormSubmit(evt) {
   if (form.email.value && form.message.value) {
     evt.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
-    console.log(formData);
   } else {
     alert('Для отправки сообщения необходимо заполнить Email и Message');
   }
